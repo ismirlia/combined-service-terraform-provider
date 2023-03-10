@@ -65,7 +65,7 @@ Review the argument references that you can specify for your resource.
   The `ppc_ipaddress_range` block supports:
   - `ppc_ending_ip_address` - (Required, String) The ending ip address.
   - `ppc_starting_ip_address` - (Required, String) The staring ip address. **Note** if the `ppc_gateway` or `ppc_ipaddress_range` is not provided, it will calculate the value based on CIDR respectively.
-- `ppc_network_jumbo` - (Optional, Bool) MTU Jumbo option of the network.
+- `ppc_network_mtu` - (Optional, Integer) Maximum Transmission Unit option of the network.
 
 ## Attribute reference
 In addition to all argument reference list, you can access the following attribute reference after your resource is created.

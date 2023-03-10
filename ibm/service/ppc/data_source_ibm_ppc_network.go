@@ -75,8 +75,8 @@ func DataSourceIBMPPCNetwork() *schema.Resource {
 				Computed: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
-			"jumbo": {
-				Type:     schema.TypeBool,
+			"mtu": {
+				Type:     schema.TypeInt,
 				Computed: true,
 			},
 		},
@@ -123,7 +123,7 @@ func dataSourceIBMPPCNetworkRead(ctx context.Context, d *schema.ResourceData, me
 	if len(networkdata.DNSServers) > 0 {
 		d.Set("dns", networkdata.DNSServers)
 	}
-	d.Set("jumbo", networkdata.Jumbo)
+	d.Set("mtu", networkdata.Mtu)
 
 	return nil
 

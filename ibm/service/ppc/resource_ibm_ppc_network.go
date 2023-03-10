@@ -74,11 +74,11 @@ func ResourceIBMPPCNetwork() *schema.Resource {
 				Computed:    true,
 				Description: "PPC network gateway",
 			},
-			helpers.PPCNetworkJumbo: {
-				Type:        schema.TypeBool,
+			helpers.PPCNetworkMtu: {
+				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
-				Description: "PPC network enable MTU Jumbo option",
+				Description: "PPC Maximum Transmission Unit option",
 			},
 			helpers.PPCCloudInstanceId: {
 				Type:        schema.TypeString,
@@ -142,8 +142,8 @@ func resourceIBMPPCNetworkCreate(ctx context.Context, d *schema.ResourceData, me
 		}
 	}
 
-	if v, ok := d.GetOk(helpers.PPCNetworkJumbo); ok {
-		body.Jumbo = v.(bool)
+	if v, ok := d.GetOk(helpers.PPCNetworkMtu); ok {
+		body.Mtu = v.(int64)
 	}
 
 	if networktype == "vlan" {
@@ -215,7 +215,7 @@ func resourceIBMPPCNetworkRead(ctx context.Context, d *schema.ResourceData, meta
 	d.Set("vlan_id", networkdata.VlanID)
 	d.Set(helpers.PPCNetworkName, networkdata.Name)
 	d.Set(helpers.PPCNetworkType, networkdata.Type)
-	d.Set(helpers.PPCNetworkJumbo, networkdata.Jumbo)
+	d.Set(helpers.PPCNetworkMtu, networkdata.Mtu)
 	d.Set(helpers.PPCNetworkGateway, networkdata.Gateway)
 	ipRangesMap := []map[string]interface{}{}
 	if networkdata.IPAddressRanges != nil {
