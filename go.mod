@@ -56,6 +56,7 @@ require (
 )
 
 require (
+	github.com/IBM-Cloud/ppc-aas-go-client v0.0.0-20230302135432-ef417cfb0947
 	github.com/IBM/go-sdk-core/v3 v3.2.4
 	github.com/pkg/errors v0.9.1
 )

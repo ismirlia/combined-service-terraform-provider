@@ -161,6 +161,38 @@ var Pi_capture_storage_image_path string
 var Pi_capture_cloud_storage_access_key string
 var Pi_capture_cloud_storage_secret_key string
 
+// For Power Private Cloud Colo
+
+var Ppc_image string
+var Ppc_sap_image string
+var Ppc_image_bucket_name string
+var Ppc_image_bucket_file_name string
+var Ppc_image_bucket_access_key string
+var Ppc_image_bucket_secret_key string
+var Ppc_image_bucket_region string
+var Ppc_key_name string
+var Ppc_volume_name string
+var Ppc_volume_id string
+var Ppc_replication_volume_name string
+var Ppc_auxiliary_volume_name string
+var Ppc_volume_group_name string
+var Ppc_volume_group_id string
+var Ppc_volume_onboarding_id string
+var Ppc_network_name string
+var Ppc_cloud_instance_id string
+var Ppc_instance_name string
+var Ppc_dhcp_id string
+var PpcCloudConnectionName string
+var PpcSAPProfileID string
+var Ppc_placement_group_name string
+var PpcStoragePool string
+var PpcStorageType string
+var Ppc_shared_processor_pool_id string
+
+var Ppc_capture_storage_image_path string
+var Ppc_capture_cloud_storage_access_key string
+var Ppc_capture_cloud_storage_secret_key string
+
 // For Image
 
 var IsImageName string
@@ -852,6 +884,151 @@ func init() {
 	if Pi_shared_processor_pool_id == "" {
 		Pi_shared_processor_pool_id = "tf-pi-shared-processor-pool"
 		fmt.Println("[WARN] Set the environment variable PI_SHARED_PROCESSOR_POOL_ID for testing ibm_pi_shared_processor_pool resource else it is set to default value 'tf-pi-shared-processor-pool'")
+	}
+
+	// Added for Power Private Cloud Colo Testing
+	Ppc_image = os.Getenv("PPC_IMAGE")
+	if Ppc_image == "" {
+		Ppc_image = "c93dc4c6-e85a-4da2-9ea6-f24576256122"
+		fmt.Println("[INFO] Set the environment variable PPC_IMAGE for testing ibm_ppc_image resource else it is set to default value '7200-03-03'")
+	}
+	Ppc_sap_image = os.Getenv("PPC_SAP_IMAGE")
+	if Ppc_sap_image == "" {
+		Ppc_sap_image = "2e29d6d2-e5ed-4ff8-8fad-64e4be90e023"
+		fmt.Println("[INFO] Set the environment variable PPC_SAP_IMAGE for testing ibm_ppc_image resource else it is set to default value 'Linux-RHEL-SAP-8-2'")
+	}
+	Ppc_image_bucket_name = os.Getenv("PPC_IMAGE_BUCKET_NAME")
+	if Ppc_image_bucket_name == "" {
+		Ppc_image_bucket_name = "images-public-bucket"
+		fmt.Println("[INFO] Set the environment variable PPC_IMAGE_BUCKET_NAME for testing ibm_ppc_image resource else it is set to default value 'images-public-bucket'")
+	}
+	Ppc_image_bucket_file_name = os.Getenv("PPC_IMAGE_BUCKET_FILE_NAME")
+	if Ppc_image_bucket_file_name == "" {
+		Ppc_image_bucket_file_name = "rhel.ova.gz"
+		fmt.Println("[INFO] Set the environment variable PPC_IMAGE_BUCKET_FILE_NAME for testing ibm_ppc_image resource else it is set to default value 'rhel.ova.gz'")
+	}
+	Ppc_image_bucket_access_key = os.Getenv("PPC_IMAGE_BUCKET_ACCESS_KEY")
+	if Ppc_image_bucket_access_key == "" {
+		Ppc_image_bucket_access_key = "images-bucket-access-key"
+		fmt.Println("[INFO] Set the environment variable PPC_IMAGE_BUCKET_ACCESS_KEY for testing ibm_ppc_image_export resource else it is set to default value 'images-bucket-access-key'")
+	}
+
+	Ppc_image_bucket_secret_key = os.Getenv("PPC_IMAGE_BUCKET_SECRET_KEY")
+	if Ppc_image_bucket_secret_key == "" {
+		Ppc_image_bucket_secret_key = "images-bucket-secret-key"
+		fmt.Println("[INFO] Set the environment variable PPC_IMAGE_BUCKET_SECRET_KEY for testing ibm_ppc_image_export resource else it is set to default value 'PPC_IMAGE_BUCKET_SECRET_KEY'")
+	}
+
+	Ppc_image_bucket_region = os.Getenv("PPC_IMAGE_BUCKET_REGION")
+	if Ppc_image_bucket_region == "" {
+		Ppc_image_bucket_region = "us-east"
+		fmt.Println("[INFO] Set the environment variable PPC_IMAGE_BUCKET_REGION for testing ibm_ppc_image_export resource else it is set to default value 'us-east'")
+	}
+
+	Ppc_key_name = os.Getenv("PPC_KEY_NAME")
+	if Ppc_key_name == "" {
+		Ppc_key_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_KEY_NAME for testing ibm_ppc_key_name resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_network_name = os.Getenv("PPC_NETWORK_NAME")
+	if Ppc_network_name == "" {
+		Ppc_network_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_NETWORK_NAME for testing ibm_ppc_network_name resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_volume_name = os.Getenv("PPC_VOLUME_NAME")
+	if Ppc_volume_name == "" {
+		Ppc_volume_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_VOLUME_NAME for testing ibm_ppc_network_name resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_volume_id = os.Getenv("PPC_VOLUME_ID")
+	if Ppc_volume_id == "" {
+		Ppc_volume_id = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_VOLUME_ID for testing ibm_ppc_volume_flash_copy_mappings resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_replication_volume_name = os.Getenv("PPC_REPLICATION_VOLUME_NAME")
+	if Ppc_replication_volume_name == "" {
+		Ppc_replication_volume_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_REPLICATION_VOLUME_NAME for testing ibm_ppc_volume resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_auxiliary_volume_name = os.Getenv("PPC_AUXILIARY_VOLUME_NAME")
+	if Ppc_auxiliary_volume_name == "" {
+		Ppc_auxiliary_volume_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_AUXILIARY_VOLUME_NAME for testing ibm_ppc_volume_onboarding resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_volume_group_name = os.Getenv("PPC_VOLUME_GROUP_NAME")
+	if Ppc_volume_group_name == "" {
+		Ppc_volume_group_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_VOLUME_GROUP_NAME for testing ibm_ppc_volume_group resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_volume_group_id = os.Getenv("PPC_VOLUME_GROUP_ID")
+	if Ppc_volume_group_id == "" {
+		Ppc_volume_group_id = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_VOLUME_GROUP_ID for testing ibm_ppc_volume_group_storage_details data source else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_cloud_instance_id = os.Getenv("PPC_CLOUDINSTANCE_ID")
+	if Ppc_cloud_instance_id == "" {
+		Ppc_cloud_instance_id = "fd3454a3-14d8-4eb0-b075-acf3da5cd324"
+		fmt.Println("[INFO] Set the environment variable PPC_CLOUDINSTANCE_ID for testing ibm_ppc_image resource else it is set to default value 'd16705bd-7f1a-48c9-9e0e-1c17b71e7331'")
+	}
+
+	Ppc_instance_name = os.Getenv("PPC_PVM_INSTANCE_NAME")
+	if Ppc_instance_name == "" {
+		Ppc_instance_name = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_PVM_INSTANCE_ID for testing Ppc_instance_name resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_dhcp_id = os.Getenv("PPC_DHCP_ID")
+	if Ppc_dhcp_id == "" {
+		Ppc_dhcp_id = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_DHCP_ID for testing ibm_ppc_dhcp resource else it is set to default value 'terraform-test-power'")
+	}
+
+	PpcSAPProfileID = os.Getenv("PPC_SAP_PROFILE_ID")
+	if PpcSAPProfileID == "" {
+		PpcSAPProfileID = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_SAP_PROFILE_ID for testing ibm_ppc_sap_profile resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_placement_group_name = os.Getenv("PPC_PLACEMENT_GROUP_NAME")
+	if Ppc_placement_group_name == "" {
+		Ppc_placement_group_name = "tf-sp-placement-group"
+		fmt.Println("[WARN] Set the environment variable PPC_PLACEMENT_GROUP_NAME for testing ibm_ppc_placement_group resource else it is set to default value 'tf-sp-placement-group'")
+	}
+	PpcStoragePool = os.Getenv("PPC_STORAGE_POOL")
+	if PpcStoragePool == "" {
+		PpcStoragePool = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_STORAGE_POOL for testing ibm_ppc_storage_pool_capacity else it is set to default value 'terraform-test-power'")
+	}
+	PpcStorageType = os.Getenv("PPC_STORAGE_TYPE")
+	if PpcStorageType == "" {
+		PpcStorageType = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_STORAGE_TYPE for testing ibm_ppc_storage_type_capacity else it is set to default value 'terraform-test-power'")
+	}
+	// Added for resource capture instance testing
+	Ppc_capture_storage_image_path = os.Getenv("PPC_CAPTURE_STORAGE_IMAGE_PATH")
+	if Ppc_capture_storage_image_path == "" {
+		Ppc_capture_storage_image_path = "bucket-test"
+		fmt.Println("[INFO] Set the environment variable PPC_CAPTURE_STORAGE_IMAGE_PATH for testing Ppc_capture_storage_image_path resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_capture_cloud_storage_access_key = os.Getenv("PPC_CAPTURE_CLOUD_STORAGE_ACCESS_KEY")
+	if Ppc_capture_cloud_storage_access_key == "" {
+		Ppc_capture_cloud_storage_access_key = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_CAPTURE_CLOUD_STORAGE_ACCESS_KEY for testing Ppc_capture_cloud_storage_access_key resource else it is set to default value 'terraform-test-power'")
+	}
+
+	Ppc_capture_cloud_storage_secret_key = os.Getenv("PPC_CAPTURE_CLOUD_STORAGE_SECRET_KEY")
+	if Ppc_capture_cloud_storage_secret_key == "" {
+		Ppc_capture_cloud_storage_secret_key = "terraform-test-power"
+		fmt.Println("[INFO] Set the environment variable PPC_CAPTURE_CLOUD_STORAGE_SECRET_KEY for testing Ppc_capture_cloud_storage_secret_key resource else it is set to default value 'terraform-test-power'")
 	}
 
 	WorkspaceID = os.Getenv("SCHEMATICS_WORKSPACE_ID")
