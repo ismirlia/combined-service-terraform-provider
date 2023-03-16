@@ -110,6 +110,7 @@ import (
 	"github.com/IBM-Cloud/bluemix-go/rest"
 	bxsession "github.com/IBM-Cloud/bluemix-go/session"
 	ibmpisession "github.com/IBM-Cloud/power-go-client/ibmpisession"
+	ibmppcsession "github.com/IBM-Cloud/ppc-aas-go-client/ibmppcsession"
 	codeengine "github.com/IBM/code-engine-go-sdk/codeenginev2"
 	"github.com/IBM/continuous-delivery-go-sdk/cdtektonpipelinev2"
 	"github.com/IBM/continuous-delivery-go-sdk/cdtoolchainv2"
@@ -231,6 +232,7 @@ type ClientSession interface {
 	ResourceControllerAPIV2() (controllerv2.ResourceControllerAPIV2, error)
 	SoftLayerSession() *slsession.Session
 	IBMPISession() (*ibmpisession.IBMPISession, error)
+	IBMPPCSession() (*ibmppcsession.IBMPPCSession, error)
 	UserManagementAPI() (usermanagementv2.UserManagementAPI, error)
 	PushServiceV1() (*pushservicev1.PushServiceV1, error)
 	EventNotificationsApiV1() (*eventnotificationsv1.EventNotificationsV1, error)
@@ -378,6 +380,9 @@ type clientSession struct {
 
 	ibmpiConfigErr error
 	ibmpiSession   *ibmpisession.IBMPISession
+
+	ibmppcConfigErr error
+	ibmppcSession   *ibmppcsession.IBMPPCSession
 
 	kpErr error
 	kpAPI *kp.API
@@ -846,6 +851,12 @@ func (sess clientSession) TransitGatewayV1API() (*tg.TransitGatewayApisV1, error
 
 func (sess clientSession) IBMPISession() (*ibmpisession.IBMPISession, error) {
 	return sess.ibmpiSession, sess.ibmpiConfigErr
+}
+
+// Session to the Power Private Cloud Colo Service
+
+func (sess clientSession) IBMPPCSession() (*ibmppcsession.IBMPPCSession, error) {
+	return sess.ibmppcSession, sess.ibmppcConfigErr
 }
 
 // Private DNS Service
@@ -2056,6 +2067,22 @@ func (c *Config) ClientSession() (interface{}, error) {
 		session.ibmpiConfigErr = fmt.Errorf("Error occured while configuring ibmpisession: %q", err)
 	}
 	session.ibmpiSession = ibmpisession
+
+	// POWER PRIVATE CLOUD Service
+	ppcURL := ContructEndpoint(c.Region, "ppc-aas.cloud.ibm.com")
+	ibmPPCOptions := &ibmppcsession.IBMPPCOptions{
+		Authenticator: authenticator,
+		Debug:         os.Getenv("TF_LOG") != "",
+		Region:        c.Region,
+		URL:           EnvFallBack([]string{"IBMCLOUD_PPC_API_ENDPOINT"}, ppcURL),
+		UserAccount:   userConfig.UserAccount,
+		Zone:          c.Zone,
+	}
+	ibmppcsession, err := ibmppcsession.NewIBMPPCSession(ibmPPCOptions)
+	if err != nil {
+		session.ibmppcConfigErr = fmt.Errorf("[ERROR] Error occured while configuring ibmppcsession: %q", err)
+	}
+	session.ibmppcSession = ibmppcsession
 
 	// PRIVATE DNS Service
 	pdnsURL := dns.DefaultServiceURL

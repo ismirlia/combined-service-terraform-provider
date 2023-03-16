@@ -42,6 +42,7 @@ import (
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/kms"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/kubernetes"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/power"
+	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/ppc"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/pushnotification"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/registry"
 	"github.com/IBM-Cloud/terraform-provider-ibm/ibm/service/resourcecontroller"
@@ -590,6 +591,43 @@ func Provider() *schema.Provider {
 			"ibm_pi_volume_onboardings":                     power.DataSourceIBMPIVolumeOnboardings(),
 			"ibm_pi_volume_onboarding":                      power.DataSourceIBMPIVolumeOnboarding(),
 
+			// // Added for Power Private Cloud Resources
+			"ibm_ppc_catalog_images":                         ppc.DataSourceIBMPPCCatalogImages(),
+			"ibm_ppc_cloud_instance":                         ppc.DataSourceIBMPPCCloudInstance(),
+			"ibm_ppc_dhcp":                                   ppc.DataSourceIBMPPCDhcp(),
+			"ibm_ppc_dhcps":                                  ppc.DataSourceIBMPPCDhcps(),
+			"ibm_ppc_image":                                  ppc.DataSourceIBMPPCImage(),
+			"ibm_ppc_images":                                 ppc.DataSourceIBMPPCImages(),
+			"ibm_ppc_instance":                               ppc.DataSourceIBMPPCInstance(),
+			"ibm_ppc_instances":                              ppc.DataSourceIBMPPCInstances(),
+			"ibm_ppc_instance_ip":                            ppc.DataSourceIBMPPCInstanceIP(),
+			"ibm_ppc_instance_snapshots":                     ppc.DataSourceIBMPPCSnapshots(),
+			"ibm_ppc_instance_volumes":                       ppc.DataSourceIBMPPCInstanceVolumes(),
+			"ibm_ppc_key":                                    ppc.DataSourceIBMPPCKey(),
+			"ibm_ppc_keys":                                   ppc.DataSourceIBMPPCKeys(),
+			"ibm_ppc_network":                                ppc.DataSourceIBMPPCNetwork(),
+			"ibm_ppc_network_port":                           ppc.DataSourceIBMPPCNetworkPort(),
+			"ibm_ppc_placement_group":                        ppc.DataSourceIBMPPCPlacementGroup(),
+			"ibm_ppc_placement_groups":                       ppc.DataSourceIBMPPCPlacementGroups(),
+			"ibm_ppc_public_network":                         ppc.DataSourceIBMPPCPublicNetwork(),
+			"ibm_ppc_sap_profile":                            ppc.DataSourceIBMPPCSAPProfile(),
+			"ibm_ppc_sap_profiles":                           ppc.DataSourceIBMPPCSAPProfiles(),
+			"ibm_ppc_storage_pool_capacity":                  ppc.DataSourceIBMPPCStoragePoolCapacity(),
+			"ibm_ppc_storage_pools_capacity":                 ppc.DataSourceIBMPPCStoragePoolsCapacity(),
+			"ibm_ppc_storage_type_capacity":                  ppc.DataSourceIBMPPCStorageTypeCapacity(),
+			"ibm_ppc_storage_types_capacity":                 ppc.DataSourceIBMPPCStorageTypesCapacity(),
+			"ibm_ppc_system_pools":                           ppc.DataSourceIBMPPCSystemPools(),
+			"ibm_ppc_tenant":                                 ppc.DataSourceIBMPPCTenant(),
+			"ibm_ppc_volume":                                 ppc.DataSourceIBMPPCVolume(),
+			"ibm_ppc_volume_group":                           ppc.DataSourceIBMPPCVolumeGroup(),
+			"ibm_ppc_volume_groups":                          ppc.DataSourceIBMPPCVolumeGroups(),
+			"ibm_ppc_volume_group_details":                   ppc.DataSourceIBMPPCVolumeGroupDetails(),
+			"ibm_ppc_volume_groups_details":                  ppc.DataSourceIBMPPCVolumeGroupsDetails(),
+			"ibm_ppc_volume_group_storage_details":           ppc.DataSourceIBMPPCVolumeGroupStorageDetails(),
+			"ibm_ppc_volume_group_remote_copy_relationships": ppc.DataSourceIBMPPCVolumeGroupRemoteCopyRelationships(),
+			"ibm_ppc_volume_flash_copy_mappings":             ppc.DataSourceIBMPPCVolumeFlashCopyMappings(),
+			"ibm_ppc_volume_remote_copy_relationship":        ppc.DataSourceIBMPPCVolumeRemoteCopyRelationship(),
+
 			// // Added for private dns zones
 
 			"ibm_dns_zones":                            dnsservices.DataSourceIBMPrivateDNSZones(),
@@ -1071,6 +1109,24 @@ func Provider() *schema.Provider {
 			"ibm_pi_spp_placement_group":             power.ResourceIBMPISPPPlacementGroup(),
 			"ibm_pi_shared_processor_pool":           power.ResourceIBMPISharedProcessorPool(),
 
+			// //Added for Power Private Cloud Colo
+			"ibm_ppc_key":                 ppc.ResourceIBMPPCKey(),
+			"ibm_ppc_volume":              ppc.ResourceIBMPPCVolume(),
+			"ibm_ppc_volume_group":        ppc.ResourceIBMPPCVolumeGroup(),
+			"ibm_ppc_volume_group_action": ppc.ResourceIBMPPCVolumeGroupAction(),
+			"ibm_ppc_network":             ppc.ResourceIBMPPCNetwork(),
+			"ibm_ppc_instance":            ppc.ResourceIBMPPCInstance(),
+			"ibm_ppc_instance_action":     ppc.ResourceIBMPPCInstanceAction(),
+			"ibm_ppc_volume_attach":       ppc.ResourceIBMPPCVolumeAttach(),
+			"ibm_ppc_capture":             ppc.ResourceIBMPPCCapture(),
+			"ibm_ppc_image":               ppc.ResourceIBMPPCImage(),
+			"ibm_ppc_image_export":        ppc.ResourceIBMPPCImageExport(),
+			"ibm_ppc_network_port":        ppc.ResourceIBMPPCNetworkPort(),
+			"ibm_ppc_snapshot":            ppc.ResourceIBMPPCSnapshot(),
+			"ibm_ppc_network_port_attach": ppc.ResourceIBMPPCNetworkPortAttach(),
+			"ibm_ppc_dhcp":                ppc.ResourceIBMPPCDhcp(),
+			"ibm_ppc_placement_group":     ppc.ResourceIBMPPCPlacementGroup(),
+
 			// //Private DNS related resources
 			"ibm_dns_zone":              dnsservices.ResourceIBMPrivateDNSZone(),
 			"ibm_dns_permitted_network": dnsservices.ResourceIBMPrivateDNSPermittedNetwork(),
@@ -1382,6 +1438,7 @@ func Validator() validate.ValidatorDict {
 				"ibm_satellite_location":                   satellite.ResourceIBMSatelliteLocationValidator(),
 				"ibm_satellite_cluster":                    satellite.ResourceIBMSatelliteClusterValidator(),
 				"ibm_pi_volume":                            power.ResourceIBMPIVolumeValidator(),
+				"ibm_ppc_volume":                           ppc.ResourceIBMPPCVolumeValidator(),
 				"ibm_atracker_target":                      atracker.ResourceIBMAtrackerTargetValidator(),
 				"ibm_atracker_route":                       atracker.ResourceIBMAtrackerRouteValidator(),
 				"ibm_atracker_settings":                    atracker.ResourceIBMAtrackerSettingsValidator(),
