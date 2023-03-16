@@ -1,0 +1,67 @@
+---
+
+subcategory: "Power Private Cloud"
+layout: "ibm"
+page_title: "IBM: ppc_volume_attach"
+description: |-
+  Manages IBM Volume Attach in the Power Private Cloud.
+---
+
+# ibm_ppc_volume_attach
+Attaches volume to a Power Private Cloud instance. For more information, about managing volume, see [getting started with IBM Power Private Cloud Virtual Servers](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-getting-started).
+
+## Example usage
+The following example attaches volume to a Power Private Cloud instance.
+
+```terraform
+resource "ibm_ppc_volume_attach" "testacc_volume_attach"{
+	ppc_cloud_instance_id = "<value of the cloud_instance_id>"
+	ppc_volume_id = "<id of the volume to attach>"
+	ppc_instance_id = "<pvm instance id>"
+}
+```
+
+**Note**
+* Please find [supported Regions](https://cloud.ibm.com/apidocs/power-cloud#endpoint) for endpoints.
+* If a Power Private Cloud instance is provisioned at `lon04`, The provider level attributes should be as follows:
+  * `region` - `lon`
+  * `zone` - `lon04`
+
+  Example usage:
+  
+  ```terraform
+    provider "ibm" {
+      region    =   "lon"
+      zone      =   "lon04"
+    }
+  ```
+  
+## Timeouts
+
+ibm_ppc_volume_attach provides the following [timeouts](https://www.terraform.io/docs/language/resources/syntax.html) configuration options:
+
+- **create** - (Default 15 minutes) Used for attaching volume.
+- **delete** - (Default 15 minutes) Used for detaching volume.
+
+## Argument reference 
+Review the argument references that you can specify for your resource. 
+
+- `ppc_cloud_instance_id` - (Required, Forces new resource, String) The GUID of the service instance associated with an account.
+- `ppc_instance_id` - (Required, Forces new resource, String) The ID of the pvm instance to attach the volume to.
+- `ppc_volume_id` - (Required, Forces new resource, String) The ID of the volume to attach.
+
+## Attribute reference
+In addition to all argument reference list, you can access the following attribute reference after your resource is created.
+
+- `id` - (String) The unique identifier of the volume attach. The ID is composed of `<power_instance_id>/<instance_id>/<volume_id>`.
+- `status` - (String) The status of the volume.
+
+## Import
+
+The `ibm_ppc_volume_attach` resource can be imported by using `power_instance_id`, `instance_id` and `volume_id`.
+
+**Example**
+
+```
+$ terraform import ibm_ppc_volume_attach.example d7bec597-4726-451f-8a63-e62e6f19c32c/49fba6c9-23f8-40bc-9899-aca322ee7d5b/cea6651a-bc0a-4438-9f8a-a0770bbf3ebb
+```
