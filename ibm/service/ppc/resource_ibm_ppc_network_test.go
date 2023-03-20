@@ -35,6 +35,7 @@ func TestAccIBMPPCNetworkbasic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "id"),
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "ppc_gateway"),
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "ppc_ipaddress_range.#"),
+					resource.TestCheckResourceAttr("ibm_ppc_network.power_networks", "ppc_network_mtu", "1450"),
 				),
 			},
 			{
@@ -48,6 +49,7 @@ func TestAccIBMPPCNetworkbasic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "id"),
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "ppc_gateway"),
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "ppc_ipaddress_range.#"),
+					resource.TestCheckResourceAttr("ibm_ppc_network.power_networks", "ppc_network_mtu", "1450"),
 				),
 			},
 		},
@@ -69,6 +71,7 @@ func TestAccIBMPPCNetworkGatewaybasic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "ppc_gateway"),
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "id"),
 					resource.TestCheckResourceAttrSet("ibm_ppc_network.power_networks", "ppc_ipaddress_range.#"),
+					resource.TestCheckResourceAttr("ibm_ppc_network.power_networks", "ppc_network_mtu", "1450"),
 				),
 			},
 			{
@@ -82,7 +85,8 @@ func TestAccIBMPPCNetworkGatewaybasic(t *testing.T) {
 					resource.TestCheckResourceAttr(
 						"ibm_ppc_network.power_networks", "ppc_ipaddress_range.0.ppc_ending_ip_address", "192.168.17.254"),
 					resource.TestCheckResourceAttr(
-						"ibm_ppc_network.power_networks", "ppc_ipaddress_range.0.ppc_starting_ip_address", "192.168.17.3"),
+						"ibm_ppc_network.power_networks", "ppc_ipaddress_range.0.ppc_starting_ip_address", "192.168.17.17"),
+					resource.TestCheckResourceAttr("ibm_ppc_network.power_networks", "ppc_network_mtu", "1450"),
 				),
 			},
 		},
@@ -185,7 +189,7 @@ func testAccCheckIBMPPCNetworkConfigGatewayUpdateDNS(name string) string {
 			ppc_cidr              = "192.168.17.0/24"
 			ppc_ipaddress_range {
 				ppc_ending_ip_address = "192.168.17.254"
-				ppc_starting_ip_address = "192.168.17.3"
+				ppc_starting_ip_address = "192.168.17.17"
 			}
 		}
 	`, acc.Ppc_cloud_instance_id, name)

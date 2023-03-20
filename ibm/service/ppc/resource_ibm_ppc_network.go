@@ -143,7 +143,7 @@ func resourceIBMPPCNetworkCreate(ctx context.Context, d *schema.ResourceData, me
 	}
 
 	if v, ok := d.GetOk(helpers.PPCNetworkMtu); ok {
-		body.Mtu = v.(int64)
+		body.Mtu = v.(*int64)
 	}
 
 	if networktype == "vlan" {

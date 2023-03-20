@@ -29,9 +29,9 @@ func TestAccIBMPPCNetworkDataSource_basic(t *testing.T) {
 
 func testAccCheckIBMPPCNetworkDataSourceConfig() string {
 	return fmt.Sprintf(`
-data "ibm_ppc_network" "testacc_ds_network" {
-    ppc_network_name = "%s"
-    ppc_cloud_instance_id = "%s"
-}`, acc.Ppc_network_name, acc.Ppc_cloud_instance_id)
-
+		data "ibm_ppc_network" "testacc_ds_network" {
+    		ppc_network_name = "%s"
+    		ppc_cloud_instance_id = "%s"
+		}
+	`, acc.Ppc_network_name, acc.Ppc_cloud_instance_id)
 }
