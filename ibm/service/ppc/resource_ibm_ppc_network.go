@@ -78,7 +78,7 @@ func ResourceIBMPPCNetwork() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
-				Description: "PPC Maximum Transmission Unit option",
+				Description: "PPC network maximum transmission unit",
 			},
 			helpers.PPCCloudInstanceId: {
 				Type:        schema.TypeString,
