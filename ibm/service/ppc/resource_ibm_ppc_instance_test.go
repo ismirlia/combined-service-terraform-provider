@@ -300,7 +300,7 @@ func TestAccIBMPPCInstanceVTL(t *testing.T) {
 	})
 }
 
-func TestAccIBMPPCSASPnstance(t *testing.T) {
+func TestAccIBMPPCSAPInstance(t *testing.T) {
 	instanceRes := "ibm_ppc_instance.sap"
 	name := fmt.Sprintf("tf-pi-sap-%d", acctest.RandIntRange(10, 100))
 
@@ -310,7 +310,7 @@ func TestAccIBMPPCSASPnstance(t *testing.T) {
 		CheckDestroy: testAccCheckIBMPPCInstanceDestroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccIBMPPCSASPnstanceConfig(name, "tinytest-1x4"),
+				Config: testAccIBMPPCSAPInstanceConfig(name, "tinytest-1x4"),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckIBMPPCInstanceExists(instanceRes),
 					resource.TestCheckResourceAttr(instanceRes, "ppc_instance_name", name),
@@ -318,7 +318,7 @@ func TestAccIBMPPCSASPnstance(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccIBMPPCSASPnstanceConfig(name, "tinytest-1x8"),
+				Config: testAccIBMPPCSAPInstanceConfig(name, "tinytest-1x8"),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckIBMPPCInstanceExists(instanceRes),
 					resource.TestCheckResourceAttr(instanceRes, "ppc_instance_name", name),
@@ -328,7 +328,7 @@ func TestAccIBMPPCSASPnstance(t *testing.T) {
 		},
 	})
 }
-func testAccIBMPPCSASPnstanceConfig(name, sapProfile string) string {
+func testAccIBMPPCSAPInstanceConfig(name, sapProfile string) string {
 	return fmt.Sprintf(`
 	resource "ibm_ppc_network" "power_network" {
 		ppc_cloud_instance_id	= "%[1]s"
