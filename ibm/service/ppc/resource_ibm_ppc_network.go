@@ -133,7 +133,7 @@ func resourceIBMPPCNetworkCreate(ctx context.Context, d *schema.ResourceData, me
 	client := st.NewIBMPPCNetworkClient(ctx, sess, cloudInstanceID)
 	var body = &models.NetworkCreate{
 		Type: &networktype,
-		Name: networkname,
+		Name: &networkname,
 	}
 	if v, ok := d.GetOk(helpers.PPCNetworkDNS); ok {
 		networkdns := flex.ExpandStringList((v.(*schema.Set)).List())
